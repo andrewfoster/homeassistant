@@ -242,7 +242,10 @@ class XiaomiGateway:
         for sid in sids:
             cmd = '{"cmd":"read","sid":"' + sid + '"}'
             resp = self._send_cmd(cmd, "read_ack")
-            model = resp["model"]
+            try:
+              model = resp["model"]
+            except KeyError:
+             continue
             
             if model == '':
                 model = 'cube'
